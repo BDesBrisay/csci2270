@@ -111,11 +111,11 @@ void readLines(string filename, Item array[]) {
     }
 }
 
-int main() {
+int main(int argc, char* argv[]) {
     Item board[100];
 
     // Reads file lines and prints out sold items
-    readLines("garageSale.txt", board);
+    readLines(argv[1], board);
     cout<<"#"<<endl;
     
     // Prints remaining items on message board
