@@ -16,7 +16,7 @@ class list {
             head = NULL;
             tail = NULL;
             add(1);
-            add(2);
+            // add(2);
             add(3);
             add(5);
             add(7);
