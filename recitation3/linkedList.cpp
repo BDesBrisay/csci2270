@@ -8,13 +8,19 @@ struct node {
 };
 
 class list {
-    private:
+    public:
         node *head, *tail;
+        int index;
 
-    public: 
         list() {
             head = NULL;
             tail = NULL;
+            add(1);
+            add(2);
+            add(3);
+            add(5);
+            add(7);
+            add(9);
         }
 
         void add(int n) {
@@ -31,10 +37,26 @@ class list {
             }
         }
 
+        void addEven(int n) {
+            node* temp = new node;
+            node* place = head;
+            temp->value = n;
+
+            while (place != NULL) {
+                if (!(place->value % 2)) {
+                    temp->next = place->next;
+                    place->next = temp;
+                    break;
+                } else {
+                    place = place->next;
+                }
+            }
+        }
+
         void print() {
             node *place = head;
             while ( place != NULL ) {
-                cout << place->value << endl;;
+                cout << place->value << endl;
                 place = place->next;
             }
         }
@@ -42,11 +64,12 @@ class list {
 
 int main() {
     list a;
-    a.add(2);
-    a.add(3);
-    a.add(4);
-    a.add(5);
-    a.add(6);
+
+    a.print();
+
+    cout << "New List: " << endl;
+
+    a.addEven(1234);
 
     a.print();
 
