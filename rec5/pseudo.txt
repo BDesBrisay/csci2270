@@ -1,0 +1,33 @@
+// Author: Bryce DesBrisay
+// Recitation 5 - Pseudo Code
+// Deletes a node from a singly linked list
+
+function delete node (param = (node value) or (index))
+    place = head
+    count = 0
+
+    while place != null
+        if (place value = param node value) or (count = param index)
+            place prev next = place next
+            delete place
+            break
+        
+        count++
+        place = place next
+
+
+// Singly linked list 3 -> 5 -> 1 -> 10 -> 2
+// delete node at index 4
+
+call function with desired index
+place = head and count = 0
+
+checks if place = null, if not
+    checks condition to see if index or value of place = param value or index
+    if condition is satisfied:
+        replace prev node's next connection with next node
+        delete current node
+        break
+    if condition not satisfied
+        change current node to next node
+
