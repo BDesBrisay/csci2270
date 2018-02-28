@@ -19,21 +19,14 @@ Queue::~Queue() {
 void Queue::enqueue(string item) {
     int count = queueCount;
 
-    if (count > 0 && count < queueSize) {
+    if (count >= 0 && count < queueSize) {
         arrayQueue[count] = item;
         queueCount++;
         queueTail = queueCount;
         cout << "E: " << arrayQueue[count] << endl;
         cout << "H: " << queueHead << endl;
         cout << "T: " << queueTail << endl;
-    } else if (count == 0) {
-        arrayQueue[queueCount] = item;
-        queueCount++;
-        queueTail = queueCount;
-        cout << "E: " << arrayQueue[count] << endl;
-        cout << "H: " << queueHead << endl;
-        cout << "T: " << queueTail << endl;
-    } else if (count >= queueSize) {
+    } else if (count == queueSize) {
         cout << "Queue Full" << endl;
     }
 }
@@ -41,13 +34,14 @@ void Queue::enqueue(string item) {
 void Queue::dequeue() {
     int place = queueHead;
 
-    if (place >= 0) {
+    if (place == queueTail - 1) {
+        cout << "Queue Empty" << endl;
+    } else if (queueCount > 0) {
         queueHead++;
+        queueSize++;
         cout << "H: " << queueHead << endl;
         cout << "T: " << queueTail << endl;
         cout << "word: " << arrayQueue[place] << endl;
-    } else if (place == queueTail-1) {
-        cout << "Queue Empty" << endl;
     }
 }
 
@@ -68,7 +62,7 @@ void Queue::enqueueSentence(string item) {
     stringstream ss;
     ss << item;
     while (getline(ss, word, ' ')) {
-        cout << word << endl;
+        enqueue(word);
     }
 }
 

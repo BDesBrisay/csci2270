@@ -9,5 +9,6 @@ int main() {
     a.printQueue();
     a.enqueue("Hello");
     a.printQueue();
-    a.enqueueSentence(", World! How is it going");
+    a.dequeue();
+    a.enqueueSentence(", World! How is it going, I am doing well thank you for asking");
 }
