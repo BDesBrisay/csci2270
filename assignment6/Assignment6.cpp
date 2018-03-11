@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -64,7 +65,8 @@ void displayMenu(string filename) {
                     tree.printMovieInventory();
                 } else if (selection == 4) {
                     cout << "Enter title:";
-                    cin >> line;
+                    cin.get();
+                    getline(cin, line);
                     tree.deleteMovieNode(line);
                     cout;
                 } else if (selection == 5) {
