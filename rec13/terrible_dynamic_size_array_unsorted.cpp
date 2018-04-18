@@ -53,6 +53,7 @@ void resize(int_array& arr)
 	}
 	
 	delete [] arr.data;
+	// Fixed resize function to assign new resized array after deleting the old one instead of before
 	arr.data = new_data;
 }
 
@@ -78,7 +79,7 @@ bool remove(int_array& arr, const int& target)
 	// The indentation of the return statement was not in the if statement
 	if (i == arr.count) return false;
 
-	arr.data[i] = 333;
+	arr.data[i] = arr.data[arr.count];
 	arr.count--;
 	return true;
 }
