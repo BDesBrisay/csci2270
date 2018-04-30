@@ -4,9 +4,9 @@
 using namespace std;
  
 int main() {
-    MinHeap h(11); 
+    MinHeap h(10); 
     
-    for (int i = 0; i < 11; i++) {
+    for (int i = 0; i < 10; i++) {
         patient* newP = new patient("Sally",i,1+10);
         h.insertNode(*newP);
     }
