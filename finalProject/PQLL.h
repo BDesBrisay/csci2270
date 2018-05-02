@@ -22,15 +22,13 @@ class PQLL {
     public: 
         PQLL();
         ~PQLL();
-        void insertNode(patientNode*);
-        void deleteNode();
+        void insertNode(string, int, int);
         patientNode* extractMin();
-        void swap(patientNode*, patientNode*);
         void printList();
 
     private:
         patientNode* head;
-        int capacity;
+        patientNode* tail;
         int size;
 };
 
