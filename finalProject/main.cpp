@@ -1,6 +1,7 @@
 #include "MinHeap.h"
 #include "PQLL.h"
 #include <iostream>
+#include <stdlib.h> 
 
 using namespace std;
  
@@ -12,7 +13,9 @@ int main() {
         patient* newP = new patient("Sally",i,1+10);
         h.insertNode(*newP);
 
-        ll.insertNode("Jackie", i, i+10);
+        int p = rand() % 10;
+        int d = rand() % 10;
+        ll.insertNode("Jackie", p, d);
     }
 
     for (int i = 3; i < 8; i++) {
