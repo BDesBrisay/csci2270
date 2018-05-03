@@ -31,8 +31,11 @@ void PQLL::insertNode(string name, int p, int d) {
         head = newNode;
         tail = newNode;
     } 
+    // Check if head ptime is greater than new ptime
     else if (head->ptime >= p) {
+        // Check if head ptime is equal to new ptime so you can compare dtime
         if (head->ptime == p) {
+            // Comparing dtimes for elements with equal ptimes
             if (head->dtime > d) {
                 newNode->next = head;
                 head = newNode;
@@ -48,18 +51,29 @@ void PQLL::insertNode(string name, int p, int d) {
         }
     } 
     else {
+        // Find node next to position of new node
         while (place->next != nullptr && place->next->ptime < p) {
             place = place->next;
         }
 
-        if (place->next != nullptr && place->next->ptime == p) {
-            if (place->next->dtime > d) {
-                newNode->next = place->next;
-                place->next = newNode;
+        if (place->next != nullptr) {
+            if (place->next->ptime == p) {
+                // Comparing dtimes for elements with equal ptimes
+                if (place->next->dtime > d) {
+                    newNode->next = place->next;
+                    place->next = newNode;
+                }
+                else {
+                    while (place->next != nullptr && place->next->ptime == p && place->next->dtime < d) {
+                        place = place->next;
+                    }
+                    newNode->next = place->next;
+                    place->next = newNode;
+                }
             }
             else {
-                newNode->next = place->next->next;
-                place->next->next = newNode;
+                newNode->next = place->next;
+                place->next = newNode;
             }
         } 
         else {
@@ -72,5 +86,7 @@ void PQLL::insertNode(string name, int p, int d) {
 };
 
 patientNode* PQLL::extractMin() {
-
+    patientNode* min = head;
+    head = head->next;
+    return min;
 };

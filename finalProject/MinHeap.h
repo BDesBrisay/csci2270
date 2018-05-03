@@ -25,7 +25,7 @@ class MinHeap {
         void MinHeapify(int);
         patient extractMin();
         void deleteNode(int);
-        void insertNode(patient);
+        void insertNode(string, int, int);
 
         // Helper functions
         void printHeap();

@@ -19,7 +19,7 @@ void MinHeap::swap(patient *a, patient *b) {
 void MinHeap::printHeap() {
     cout << endl;
     for (int i = 0; i < heap_size; i++) {
-        cout << harr[i].ptime << " ";
+        cout << harr[i].name << ", " << harr[i].ptime << ", " << harr[i].dtime << endl;
     }
     cout << endl;
 }
@@ -30,10 +30,23 @@ void MinHeap::MinHeapify(int i) {
     int l = left(i);
     int r = right(i);
     int smallest = i;
+    // Check if left or right nodes have higher priority than current node
     if (l < heap_size && harr[l].ptime < harr[i].ptime) smallest = l;
+    if (harr[l].ptime == harr[i].ptime) {
+        if (harr[l].dtime < harr[i].dtime) {
+            smallest = l;
+        }
+    } 
     if (r < heap_size && harr[r].ptime < harr[smallest].ptime) smallest = r;
+    if (harr[r].ptime == harr[smallest].ptime) {
+        if (harr[r].dtime < harr[smallest].dtime) {
+            smallest = r;
+        }
+    } 
+    // If left or right nodes are higher priority than current node, switch the two and check again
     if (smallest != i) {
         swap(&harr[i], &harr[smallest]);
+        // Recursive function to correct tree after a change
         MinHeapify(smallest);
     }
 }
@@ -68,7 +81,7 @@ void MinHeap::deleteNode(int i) {
 }
  
 // Inserts a new value
-void MinHeap::insertNode(patient newP) {
+void MinHeap::insertNode(string name, int p, int d) {
     if (heap_size == capacity) {
         cout << "The heap is full" << endl;
         return;
@@ -76,10 +89,22 @@ void MinHeap::insertNode(patient newP) {
  
     int i = heap_size;
     heap_size++;
-    harr[i] = newP;
+    patient* newP = new patient(name, p, d);
+    harr[i] = *newP;
  
-    while (i != 0 && harr[parent(i)].ptime > harr[i].ptime) {
-       swap(&harr[i], &harr[parent(i)]);
-       i = parent(i);
+    while (i != 0 && harr[parent(i)].ptime >= harr[i].ptime) {
+        if (harr[parent(i)].ptime == harr[i].ptime) {
+            if (harr[parent(i)].dtime > harr[i].dtime) {
+                swap(&harr[i], &harr[parent(i)]);
+                i = parent(i);
+            }
+            else {
+                i = 0;
+            }
+        }
+        else {
+            swap(&harr[i], &harr[parent(i)]);
+            i = parent(i);
+        }
     }
 }
