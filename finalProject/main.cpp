@@ -45,7 +45,7 @@ int main() {
 
 
     // Run through line by line to extract data from file
-    while (i <= 880) {
+    while (i < 880) {
         stringstream ss;
         patientData >> line;
         ss << line;
@@ -81,7 +81,7 @@ int main() {
         i++;
     }
 
-    h.printHeap();
+    // h.printHeap();
 
     for (int i = 0; i < 880; i++) {
         t1 = clock();

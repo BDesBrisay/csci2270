@@ -29,7 +29,7 @@ class MinHeap {
 
         // Helper functions
         void printHeap();
-        void swap(patient *a, patient *b);
+        // void swap(patient *a, patient *b);
         patient getMin() { return harr[0]; };
         int parent(int i) { return (i-1)/2; };
         int left(int i) { return (2*i + 1); };

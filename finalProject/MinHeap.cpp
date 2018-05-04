@@ -1,6 +1,7 @@
 #include "MinHeap.h"
 #include <iostream>
 #include <climits>
+#include <algorithm>
 
 using namespace std;
 
@@ -10,11 +11,11 @@ MinHeap::MinHeap(int cap) {
     harr = new patient[cap];
 }
  
-void MinHeap::swap(patient *a, patient *b) {
+/*void MinHeap::swap(patient *a, patient *b) {
     patient temp = *a;
     *a = *b;
     *b = temp;
-}
+}*/
 
 void MinHeap::printHeap() {
     cout << endl;
@@ -31,21 +32,25 @@ void MinHeap::MinHeapify(int i) {
     int r = right(i);
     int smallest = i;
     // Check if left or right nodes have higher priority than current node
-    if (l < heap_size && harr[l].ptime < harr[i].ptime) smallest = l;
-    if (harr[l].ptime == harr[i].ptime) {
-        if (harr[l].dtime < harr[i].dtime) {
+    if (l < heap_size && harr[l].ptime <= harr[i].ptime) {
+        if (harr[l].ptime == harr[i].ptime) {
+            if (harr[l].dtime < harr[i].dtime) smallest = l;
+        }
+        else  {
             smallest = l;
         }
-    } 
-    if (r < heap_size && harr[r].ptime < harr[smallest].ptime) smallest = r;
-    if (harr[r].ptime == harr[smallest].ptime) {
-        if (harr[r].dtime < harr[smallest].dtime) {
-            smallest = r;
+    }
+    if (r < heap_size && harr[r].ptime <= harr[smallest].ptime) {
+        if (harr[r].ptime == harr[smallest].ptime) {
+            if (harr[r].dtime < harr[smallest].dtime) smallest = r;
         }
-    } 
+        else {
+            smallest = r;
+        } 
+    }
     // If left or right nodes are higher priority than current node, switch the two and check again
     if (smallest != i) {
-        swap(&harr[i], &harr[smallest]);
+        swap(harr[i], harr[smallest]);
         // Recursive function to correct tree after a change
         MinHeapify(smallest);
     }
@@ -74,7 +79,7 @@ patient MinHeap::extractMin() {
 void MinHeap::deleteNode(int i) {
     harr[i].ptime = INT_MIN;
     while (i != 0 && harr[parent(i)].ptime > harr[i].ptime) {
-       swap(&harr[i], &harr[parent(i)]);
+       swap(harr[i], harr[parent(i)]);
        i = parent(i);
     }
     extractMin();
@@ -88,14 +93,13 @@ void MinHeap::insertNode(string name, int p, int d) {
     }
  
     int i = heap_size;
-    heap_size++;
     patient* newP = new patient(name, p, d);
     harr[i] = *newP;
  
     while (i != 0 && harr[parent(i)].ptime >= harr[i].ptime) {
         if (harr[parent(i)].ptime == harr[i].ptime) {
             if (harr[parent(i)].dtime > harr[i].dtime) {
-                swap(&harr[i], &harr[parent(i)]);
+                swap(harr[i], harr[parent(i)]);
                 i = parent(i);
             }
             else {
@@ -103,8 +107,10 @@ void MinHeap::insertNode(string name, int p, int d) {
             }
         }
         else {
-            swap(&harr[i], &harr[parent(i)]);
+            swap(harr[i], harr[parent(i)]);
             i = parent(i);
         }
     }
+
+    heap_size++;
 }
